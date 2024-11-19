@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 443
+RewriteRule ^index.html(.*) http://%{HTTP_HOST}:3002/$1 [P,L]
+RewriteRule (.*) http://%{HTTP_HOST}:3002/$1 [P,L]
