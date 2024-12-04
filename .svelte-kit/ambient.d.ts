@@ -113,9 +113,6 @@ declare module '$env/static/private' {
 	export const VSCODE_NONCE: string;
 	export const VSCODE_STABLE: string;
 	export const windir: string;
-	export const WSLENV: string;
-	export const WT_PROFILE_ID: string;
-	export const WT_SESSION: string;
 }
 
 /**
@@ -234,9 +231,6 @@ declare module '$env/dynamic/private' {
 		VSCODE_NONCE: string;
 		VSCODE_STABLE: string;
 		windir: string;
-		WSLENV: string;
-		WT_PROFILE_ID: string;
-		WT_SESSION: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
