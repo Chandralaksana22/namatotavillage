@@ -1,20 +1,6 @@
-import { T as getContext, V as store_get, W as unsubscribe_stores, S as pop, Q as push } from "../../chunks/index.js";
+import { g as getContext, c as create_ssr_component, b as subscribe, e as escape } from "../../chunks/ssr.js";
 import "../../chunks/exports.js";
-const CONTENT_REGEX = /[&<]/g;
-function escape_html(value, is_attr) {
-  const str = String(value ?? "");
-  const pattern = CONTENT_REGEX;
-  pattern.lastIndex = 0;
-  let escaped = "";
-  let last = 0;
-  while (pattern.test(str)) {
-    const i = pattern.lastIndex - 1;
-    const ch = str[i];
-    escaped += str.substring(last, i) + (ch === "&" ? "&amp;" : ch === '"' ? "&quot;" : "&lt;");
-    last = i + 1;
-  }
-  return escaped + str.substring(last);
-}
+import { o as onMount } from "../../chunks/ssr2.js";
 function get(key, parse = JSON.parse) {
   try {
     return parse(sessionStorage[key]);
@@ -23,6 +9,19 @@ function get(key, parse = JSON.parse) {
 }
 const SNAPSHOT_KEY = "sveltekit:snapshot";
 const SCROLL_KEY = "sveltekit:scroll";
+const is_legacy = onMount.toString().includes("$$") || /function \w+\(\) \{\}/.test(onMount.toString());
+if (is_legacy) {
+  ({
+    data: {},
+    form: null,
+    error: null,
+    params: {},
+    route: { id: null },
+    state: {},
+    status: -1,
+    url: new URL("https://example.com")
+  });
+}
 get(SCROLL_KEY) ?? {};
 get(SNAPSHOT_KEY) ?? {};
 const getStores = () => {
@@ -46,13 +45,12 @@ const page = {
     return store.subscribe(fn);
   }
 };
-function Error$1($$payload, $$props) {
-  push();
-  var $$store_subs;
-  $$payload.out += `<h1>${escape_html(store_get($$store_subs ??= {}, "$page", page).status)}</h1> <p>${escape_html(store_get($$store_subs ??= {}, "$page", page).error?.message)}</p>`;
-  if ($$store_subs) unsubscribe_stores($$store_subs);
-  pop();
-}
+const Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $page, $$unsubscribe_page;
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_page();
+  return `<h1>${escape($page.status)}</h1> <p>${escape($page.error?.message)}</p>`;
+});
 export {
   Error$1 as default
 };

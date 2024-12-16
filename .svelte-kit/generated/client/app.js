@@ -9,13 +9,18 @@ export const nodes = [
 export const server_loads = [];
 
 export const dictionary = {
-		"/": [2]
+		"/": [~2]
 	};
 
 export const hooks = {
 	handleError: (({ error }) => { console.error(error) }),
-
-	reroute: (() => {})
+	
+	reroute: (() => {}),
+	transport: {}
 };
 
-export { default as root } from '../root.js';
+export const decoders = Object.fromEntries(Object.entries(hooks.transport).map(([k, v]) => [k, v.decode]));
+
+export const decode = (type, value) => decoders[type](value);
+
+export { default as root } from '../root.svelte';

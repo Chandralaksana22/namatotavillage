@@ -34,9 +34,9 @@
 		});
 	});
 
-	let { children } = $props();
+
 </script>
 
 <div class="app">
-	{@render children()}
+	<slot />
 </div>

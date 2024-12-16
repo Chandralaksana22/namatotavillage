@@ -1,9 +1,10 @@
-import { n as noop, D as DEV } from "./chunks/index.js";
-import { s as safe_not_equal, b as base, a as assets, o as override, r as reset, p as public_env, c as safe_public_env, d as read_implementation, e as options, f as set_private_env, g as prerendering, h as set_public_env, i as get_hooks, j as set_safe_public_env, k as set_read_implementation } from "./chunks/internal.js";
+import { b as base, a as assets, o as override, r as reset, p as public_env, s as safe_public_env, c as read_implementation, d as options, e as set_private_env, f as prerendering, g as set_public_env, h as get_hooks, i as set_safe_public_env, j as set_read_implementation } from "./chunks/internal.js";
 import { m as make_trackable, d as disable_search, n as normalize_path, a as add_data_suffix, r as resolve, b as decode_pathname, h as has_data_suffix, s as strip_data_suffix, c as decode_params, v as validate_layout_server_exports, e as validate_layout_exports, f as validate_page_server_exports, g as validate_page_exports, i as validate_server_exports } from "./chunks/exports.js";
 import * as devalue from "devalue";
+import { n as noop, s as safe_not_equal } from "./chunks/ssr.js";
 import { parse, serialize } from "cookie";
 import * as set_cookie_parser from "set-cookie-parser";
+const BROWSER = false;
 const SVELTE_KIT_ASSETS = "/_svelte_kit_assets";
 const ENDPOINT_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"];
 const PAGE_METHODS = ["GET", "POST", "HEAD"];
@@ -155,6 +156,39 @@ function get_status(error) {
 function get_message(error) {
   return error instanceof SvelteKitError ? error.text : "Internal Error";
 }
+const escape_html_attr_dict = {
+  "&": "&amp;",
+  '"': "&quot;"
+  // Svelte also escapes < because the escape function could be called inside a `noscript` there
+  // https://github.com/sveltejs/svelte/security/advisories/GHSA-8266-84wp-wv5c
+  // However, that doesn't apply in SvelteKit
+};
+const escape_html_dict = {
+  "&": "&amp;",
+  "<": "&lt;"
+};
+const surrogates = (
+  // high surrogate without paired low surrogate
+  "[\\ud800-\\udbff](?![\\udc00-\\udfff])|[\\ud800-\\udbff][\\udc00-\\udfff]|[\\udc00-\\udfff]"
+);
+const escape_html_attr_regex = new RegExp(
+  `[${Object.keys(escape_html_attr_dict).join("")}]|` + surrogates,
+  "g"
+);
+const escape_html_regex = new RegExp(
+  `[${Object.keys(escape_html_dict).join("")}]|` + surrogates,
+  "g"
+);
+function escape_html(str, is_attr) {
+  const dict = is_attr ? escape_html_attr_dict : escape_html_dict;
+  const escaped_str = str.replace(is_attr ? escape_html_attr_regex : escape_html_regex, (match) => {
+    if (match.length === 2) {
+      return match;
+    }
+    return dict[match] ?? `&#${match.charCodeAt(0)};`;
+  });
+  return escaped_str;
+}
 function method_not_allowed(mod, method) {
   return text(`${method} method not allowed`, {
     status: 405,
@@ -171,7 +205,7 @@ function allowed_methods(mod) {
   return allowed;
 }
 function static_error_page(options2, status, message) {
-  let page = options2.templates.error({ status, message });
+  let page = options2.templates.error({ status, message: escape_html(message) });
   return text(page, {
     headers: { "content-type": "text/html; charset=utf-8" },
     status
@@ -312,7 +346,7 @@ async function handle_action_json_request(event, options2, server) {
     const no_actions_error = new SvelteKitError(
       405,
       "Method Not Allowed",
-      "POST method not allowed. No actions exist for this page"
+      `POST method not allowed. No form actions exist for ${"this page"}`
     );
     return action_json(
       {
@@ -343,7 +377,8 @@ async function handle_action_json_request(event, options2, server) {
         data: stringify_action_response(
           data.data,
           /** @type {string} */
-          event.route.id
+          event.route.id,
+          options2.hooks.transport
         )
       });
     } else {
@@ -354,7 +389,8 @@ async function handle_action_json_request(event, options2, server) {
         data: stringify_action_response(
           data,
           /** @type {string} */
-          event.route.id
+          event.route.id,
+          options2.hooks.transport
         )
       });
     }
@@ -403,7 +439,7 @@ async function handle_action_request(event, server) {
       error: new SvelteKitError(
         405,
         "Method Not Allowed",
-        "POST method not allowed. No actions exist for this page"
+        `POST method not allowed. No form actions exist for ${"this page"}`
       )
     };
   }
@@ -482,13 +518,24 @@ function validate_action_return(data) {
     throw new Error("Cannot `return error(...)` — use `error(...)` or `return fail(...)` instead");
   }
 }
-function uneval_action_response(data, route_id) {
-  return try_deserialize(data, devalue.uneval, route_id);
+function uneval_action_response(data, route_id, transport) {
+  const replacer = (thing) => {
+    for (const key2 in transport) {
+      const encoded = transport[key2].encode(thing);
+      if (encoded) {
+        return `app.decode('${key2}', ${devalue.uneval(encoded, replacer)})`;
+      }
+    }
+  };
+  return try_serialize(data, (value) => devalue.uneval(value, replacer), route_id);
 }
-function stringify_action_response(data, route_id) {
-  return try_deserialize(data, devalue.stringify, route_id);
+function stringify_action_response(data, route_id, transport) {
+  const encoders = Object.fromEntries(
+    Object.entries(transport).map(([key2, value]) => [key2, value.encode])
+  );
+  return try_serialize(data, (value) => devalue.stringify(value, encoders), route_id);
 }
-function try_deserialize(data, fn, route_id) {
+function try_serialize(data, fn, route_id) {
   try {
     return fn(data);
   } catch (e) {
@@ -765,7 +812,7 @@ function readable(value, start) {
   };
 }
 function writable(value, start = noop) {
-  let stop = null;
+  let stop;
   const subscribers = /* @__PURE__ */ new Set();
   function set(new_value) {
     if (safe_not_equal(value, new_value)) {
@@ -786,10 +833,7 @@ function writable(value, start = noop) {
     }
   }
   function update(fn) {
-    set(fn(
-      /** @type {T} */
-      value
-    ));
+    set(fn(value));
   }
   function subscribe(run, invalidate = noop) {
     const subscriber = [run, invalidate];
@@ -797,10 +841,7 @@ function writable(value, start = noop) {
     if (subscribers.size === 1) {
       stop = start(set, update) || noop;
     }
-    run(
-      /** @type {T} */
-      value
-    );
+    run(value);
     return () => {
       subscribers.delete(subscriber);
       if (subscribers.size === 0 && stop) {
@@ -826,24 +867,6 @@ function hash(...values) {
     }
   }
   return (hash2 >>> 0).toString(36);
-}
-const escape_html_attr_dict = {
-  "&": "&amp;",
-  '"': "&quot;"
-};
-const escape_html_attr_regex = new RegExp(
-  // special characters
-  `[${Object.keys(escape_html_attr_dict).join("")}]|[\\ud800-\\udbff](?![\\udc00-\\udfff])|[\\ud800-\\udbff][\\udc00-\\udfff]|[\\udc00-\\udfff]`,
-  "g"
-);
-function escape_html_attr(str) {
-  const escaped_str = str.replace(escape_html_attr_regex, (match) => {
-    if (match.length === 2) {
-      return match;
-    }
-    return escape_html_attr_dict[match] ?? `&#${match.charCodeAt(0)};`;
-  });
-  return `"${escaped_str}"`;
 }
 const replacements = {
   "<": "\\u003C",
@@ -874,7 +897,7 @@ function serialize_data(fetched, filter, prerendering2 = false) {
   const attrs = [
     'type="application/json"',
     "data-sveltekit-fetched",
-    `data-url=${escape_html_attr(fetched.url)}`
+    `data-url="${escape_html(fetched.url, true)}"`
   ];
   if (fetched.is_b64) {
     attrs.push("data-b64");
@@ -1201,7 +1224,7 @@ class CspProvider extends BaseProvider {
     if (!content) {
       return;
     }
-    return `<meta http-equiv="content-security-policy" content=${escape_html_attr(content)}>`;
+    return `<meta http-equiv="content-security-policy" content="${escape_html(content, true)}">`;
   }
 }
 class CspReportOnlyProvider extends BaseProvider {
@@ -1365,9 +1388,19 @@ async function render_response({
       state: {}
     };
     override({ base: base$1, assets: assets$1 });
+    const render_opts = {
+      context: /* @__PURE__ */ new Map([
+        [
+          "__request__",
+          {
+            page: props.page
+          }
+        ]
+      ])
+    };
     {
       try {
-        rendered = options2.root.render(props);
+        rendered = options2.root.render(props, render_opts);
       } finally {
         reset();
       }
@@ -1477,11 +1510,17 @@ async function render_response({
 							deferred.set(id, { fulfil, reject });
 						})`);
       properties.push(`resolve: ({ id, data, error }) => {
-							const { fulfil, reject } = deferred.get(id);
-							deferred.delete(id);
-
-							if (error) reject(error);
-							else fulfil(data);
+							const try_to_resolve = () => {
+								if (!deferred.has(id)) {
+									setTimeout(try_to_resolve, 0);
+									return;
+								}
+								const { fulfil, reject } = deferred.get(id);
+								deferred.delete(id);
+								if (error) reject(error);
+								else fulfil(data);
+							}
+							try_to_resolve();
 						}`);
     }
     blocks.push(`${global} = {
@@ -1491,12 +1530,12 @@ async function render_response({
     blocks.push("const element = document.currentScript.parentElement;");
     if (page_config.ssr) {
       const serialized = { form: "null", error: "null" };
-      blocks.push(`const data = ${data};`);
       if (form_value) {
         serialized.form = uneval_action_response(
           form_value,
           /** @type {string} */
-          event.route.id
+          event.route.id,
+          options2.hooks.transport
         );
       }
       if (error) {
@@ -1504,7 +1543,7 @@ async function render_response({
       }
       const hydrate = [
         `node_ids: [${branch.map(({ node }) => node.index).join(", ")}]`,
-        "data",
+        `data: ${data}`,
         `form: ${serialized.form}`,
         `error: ${serialized.error}`
       ];
@@ -1664,6 +1703,13 @@ function get_data(event, options2, nodes, csp, global) {
         }
       );
       return `${global}.defer(${id})`;
+    } else {
+      for (const key2 in options2.hooks.transport) {
+        const encoded = options2.hooks.transport[key2].encode(thing);
+        if (encoded) {
+          return `app.decode('${key2}', ${devalue.uneval(encoded, replacer)})`;
+        }
+      }
     }
   }
   try {
@@ -1921,6 +1967,9 @@ function get_data_json(event, options2, nodes) {
   let count = 0;
   const { iterator, push, done } = create_async_iterator();
   const reducers = {
+    ...Object.fromEntries(
+      Object.entries(options2.hooks.transport).map(([key2, value]) => [key2, value.encode])
+    ),
     /** @param {any} thing */
     Promise: (thing) => {
       if (typeof thing?.then === "function") {
@@ -2041,7 +2090,7 @@ async function render_page(event, page, options2, manifest, state, resolve_opts)
     state.prerender_default = should_prerender;
     const fetched = [];
     if (get_option(nodes, "ssr") === false && !(state.prerendering && should_prerender_data)) {
-      if (DEV && action_result && !event.request.headers.has("x-sveltekit-action")) ;
+      if (BROWSER && action_result && !event.request.headers.has("x-sveltekit-action")) ;
       return await render_response({
         branch: [],
         fetched,
@@ -2290,8 +2339,7 @@ function get_cookies(request, url, trailing_slash) {
       if (c && domain_matches(url.hostname, c.options.domain) && path_matches(url.pathname, c.options.path)) {
         return c.value;
       }
-      const decoder = opts?.decode || decodeURIComponent;
-      const req_cookies = parse(header, { decode: decoder });
+      const req_cookies = parse(header, { decode: opts?.decode });
       const cookie = req_cookies[name];
       return cookie;
     },
@@ -2299,8 +2347,7 @@ function get_cookies(request, url, trailing_slash) {
      * @param {import('cookie').CookieParseOptions} opts
      */
     getAll(opts) {
-      const decoder = opts?.decode || decodeURIComponent;
-      const cookies2 = parse(header, { decode: decoder });
+      const cookies2 = parse(header, { decode: opts?.decode });
       for (const c of Object.values(new_cookies)) {
         if (domain_matches(url.hostname, c.options.domain) && path_matches(url.pathname, c.options.path)) {
           cookies2[c.name] = c.value;
@@ -2658,12 +2705,12 @@ async function respond(request, options2, manifest, state) {
         trailing_slash = "always";
       } else if (route.page) {
         const nodes = await load_page_nodes(route.page, manifest);
-        if (DEV) ;
+        if (BROWSER) ;
         trailing_slash = get_option(nodes, "trailingSlash");
       } else if (route.endpoint) {
         const node = await route.endpoint();
         trailing_slash = node.trailingSlash;
-        if (DEV) ;
+        if (BROWSER) ;
       }
       if (!is_data_request) {
         const normalized = normalize_path(url.pathname, trailing_slash ?? "never");
@@ -2931,6 +2978,7 @@ const prerender_env_handler = {
     );
   }
 };
+let init_promise;
 class Server {
   /** @type {import('types').SSROptions} */
   #options;
@@ -2964,7 +3012,7 @@ class Server {
     if (read) {
       set_read_implementation(read);
     }
-    if (!this.#options.hooks) {
+    await (init_promise ??= (async () => {
       try {
         const module = await get_hooks();
         this.#options.hooks = {
@@ -2972,14 +3020,18 @@ class Server {
           handleError: module.handleError || (({ error }) => console.error(error)),
           handleFetch: module.handleFetch || (({ request, fetch: fetch2 }) => fetch2(request)),
           reroute: module.reroute || (() => {
-          })
+          }),
+          transport: module.transport || {}
         };
+        if (module.init) {
+          await module.init();
+        }
       } catch (error) {
         {
           throw error;
         }
       }
-    }
+    })());
   }
   /**
    * @param {Request} request

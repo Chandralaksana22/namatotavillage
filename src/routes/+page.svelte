@@ -1,14 +1,25 @@
-<script>
+<script lang="ts">
+	import Footer from '$lib/component/navigation/Footer.svelte';
 	import Navbar from '$lib/component/navigation/Navbar.svelte';
 	import SectionAbout from '$lib/component/section/Section-about.svelte';
 	import SectionTour from '$lib/component/section/Section-tour.svelte';
+	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+	import '@splidejs/svelte-splide/css';
+	import type { PageServerData } from './$types';
+	import Testimonials from '$lib/component/section/Testimonials.svelte';
+	export let data: PageServerData;
+	let information = data?.information;
+	let packages = data?.packages;
+	console.log(packages)
 </script>
 
+<svelte:head>
+	<title>Desa Wisata Namatota</title>
+</svelte:head>
 <Navbar />
 <section
-	style="background-image:url('/img/hero.jpg'); height:100vh; background-size:cover; background-repeat:no-repeat; position:relative;"
+	style="background-image:url('{information[0]?.images[0]?.path}'); height:100vh; background-size:cover; background-repeat:no-repeat; position:relative;"
 >
-	<!-- Overlay -->
 	<div
 		style="background: rgba(0, 0, 0, 0.3); position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;"
 	></div>
@@ -30,48 +41,48 @@
 		</div>
 	</div>
 </section>
-<SectionAbout/>
-<SectionTour/>
+<SectionAbout data={information}/>
+<SectionTour data={packages}/>
 <section class="numbers">
 	<div
 		class="section-padding bg-img bg-fixed back-position-center"
-		data-background="img/slider/15.jpg"
+		data-background="{information[0]?.images[2]?.path}"
 		data-overlay-dark="6"
-		style="background-image: url(&quot;img/slider/15.jpg&quot;);"
+		style="background-image: url({information[0]?.images[2]?.path});"
 	>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="item text-center">
 						<span class="icon">
 							<i class="front flaticon-air-freight"></i>
 							<i class="back flaticon-air-freight"></i>
 						</span>
-						<h3 class="count">600</h3>
-						<h6>Flight Booking</h6>
+						<h3 class="count">35 km</h3>
+						<h6>Dari Bandara</h6>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="item text-center">
 						<span class="icon">
 							<i class="font flaticon-house"></i>
 							<i class="back flaticon-house"></i>
 						</span>
-						<h3 class="count">250</h3>
-						<h6>Amazing Tour</h6>
+						<h3 class="count">28 km</h3>
+						<h6>Dari Pusat Kota</h6>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="item text-center">
 						<span class="icon">
 							<i class="front flaticon-ship"></i>
 							<i class="back flaticon-ship"></i>
 						</span>
-						<h3 class="count">100</h3>
-						<h6>Cruises Booking</h6>
+						<h3 class="count">28 km</h3>
+						<h6>Dari Pelabuhan</h6>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<!-- <div class="col-md-3">
 					<div class="item text-center">
 						<span class="icon">
 							<i class="front flaticon-tag"></i>
@@ -80,7 +91,7 @@
 						<h3 class="count">100</h3>
 						<h6>Ticket Booking</h6>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -402,3 +413,63 @@
 		</div>
 	</div>
 </section>
+<section class="blog section-padding bg-navy">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-subtitle"><span>Travel Blog</span></div>
+				<div class="section-title"><span>Pengalaman</span>perjalanan</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<Splide
+					options={{
+						rewind: false,
+						gap: 5,
+						perPage: 3,
+						type: 'slide',
+						arrows: true,
+						pagination: false,
+						breakpoints: {
+							1024: {
+								perPage: 3,
+								gap: 10,
+								padding: { right: '10%', left: '7%' }
+							},
+							768: {
+								perPage: 1,
+								gap: 10,
+								padding: { right: '10%', left: '7%' }
+							},
+							480: {
+								perPage: 1,
+								gap: 10,
+								padding: { right: '10%', left: '7%' }
+							}
+						}
+					}}
+				>
+					<SplideSlide>
+						<div class="item">
+							<div class="position-re o-hidden">
+								<img src="img/destination/aosta1.jpg" alt="" />
+								<div class="date">
+									<a href="post.html"> <span>Dec</span> <i>04</i> </a>
+								</div>
+							</div>
+							<div class="con">
+								<span class="category">
+									<a href="blog.html">Tours</a>
+								</span>
+								<h5><a href="post.html">Most Popular Yacht Charter Routes</a></h5>
+							</div>
+						</div>
+					</SplideSlide>
+				</Splide>
+			</div>
+		</div>
+	</div>
+</section>
+<Testimonials data={information}/>
+<Footer />

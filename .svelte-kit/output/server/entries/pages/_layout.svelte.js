@@ -1,12 +1,7 @@
-import { S as pop, Q as push } from "../../chunks/index.js";
-function _layout($$payload, $$props) {
-  push();
-  let { children } = $$props;
-  $$payload.out += `<div class="app">`;
-  children($$payload);
-  $$payload.out += `<!----></div>`;
-  pop();
-}
+import { c as create_ssr_component } from "../../chunks/ssr.js";
+const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<div class="app">${slots.default ? slots.default({}) : ``}</div>`;
+});
 export {
-  _layout as default
+  Layout as default
 };

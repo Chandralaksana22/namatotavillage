@@ -23,73 +23,15 @@
 		<div class="collapse navbar-collapse" id="navbar">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item dropdown">
-					<a
-						class="nav-link active"
-						href="/">Home</a
-					>
+					<a class="nav-link active" href="/">Home</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="/">About</a></li>
-				<li class="nav-item dropdown">
-					<a
-						class="nav-link dropdown-toggle"
-						href="/"
-						role="button"
-						data-bs-toggle="dropdown"
-						data-bs-auto-close="outside"
-						aria-expanded="false">Tours <i class="ti-angle-down"></i></a
-					>
-					<ul class="dropdown-menu">
-						<li><a href="/" class="dropdown-item"><span>Tours 1</span></a></li>
-						<li><a href="/" class="dropdown-item"><span>Tours 2</span></a></li>
-						<li><a href="/" class="dropdown-item"><span>Tours 3</span></a></li>
-					</ul>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="/">Destinations</a></li>
+				<li class="nav-item"><a class="nav-link" href="/destinasi">Destinasi</a></li>
+
+				<li class="nav-item"><a class="nav-link" href="/">Paket Wisata</a></li>
+				<li class="nav-item"><a class="nav-link" href="/">Souvenir</a></li>
+				<li class="nav-item"><a class="nav-link" href="/">Blog</a></li>
 				<li class="nav-item"><a class="nav-link" href="/">Gallery</a></li>
-				<li class="nav-item dropdown">
-					<a
-						class="nav-link dropdown-toggle"
-						href="#"
-						role="button"
-						data-bs-toggle="dropdown"
-						data-bs-auto-close="outside"
-						aria-expanded="false">Pages <i class="ti-angle-down"></i></a
-					>
-					<ul class="dropdown-menu">
-						<li><a href="/" class="dropdown-item"><span>Tour Details</span></a></li>
-						<li><a href="/" class="dropdown-item"><span>Tour Search</span></a></li>
-						<li><a href="/" class="dropdown-item"><span>Post Single</span></a></li>
-						<li class="dropdown-submenu dropdown">
-							<a
-								class="dropdown-item dropdown-toggle"
-								data-bs-toggle="dropdown"
-								data-bs-auto-close="outside"
-								aria-expanded="false"
-								href="#"><span>Other Pages <i class="ti-angle-right"></i></span></a
-							>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="/" class="dropdown-item"><span>Coming Soon</span></a>
-								</li>
-								<li><a href="/" class="dropdown-item"><span>404 Page</span></a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a
-						class="nav-link dropdown-toggle"
-						href="#"
-						role="button"
-						data-bs-toggle="dropdown"
-						data-bs-auto-close="outside"
-						aria-expanded="false">Blog <i class="ti-angle-down"></i></a
-					>
-					<ul class="dropdown-menu">
-						<li><a href="/" class="dropdown-item"><span>Blog 01</span></a></li>
-						<li><a href="/" class="dropdown-item"><span>Blog 02</span></a></li>
-					</ul>
-				</li>
+
 				<li class="nav-item"><a class="nav-link" href="/">Contact</a></li>
 			</ul>
 		</div>

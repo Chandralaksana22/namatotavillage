@@ -1,3 +1,9 @@
+<script lang="ts">
+	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+	import '@splidejs/svelte-splide/css';
+	export let data: any = [];
+</script>
+
 <section class="tours1 section-padding bg-lightnav" data-scroll-index="1">
 	<div class="container">
 		<div class="row">
@@ -8,25 +14,20 @@
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-				<div class="item">
-					<div class="position-re o-hidden">
-						<img src="/img/tours/maldives1.jpg" alt="images" />
+				<div class="item" style="height: 95%;">
+					<div class="position-re o-hidden" style="height: 100%;">
+						<img style="height: 100%;" src={data[0]?.images[0]?.path} alt="images" />
 					</div>
-					<span class="category"><a href="/">$2.500</a></span>
+					<span class="category"><a href="/">{data[0]?.rate}</a></span>
 					<div class="con">
-						<div class="rating">
-							<i class="star active"></i> <i class="star active"></i> <i class="star active"></i>
-							<i class="star active"></i> <i class="star"></i>
-							<div class="reviews-count">(2 Reviews)</div>
-						</div>
-						<h5><a href="/">Namatota Tour</a></h5>
+						<h5><a href="/">{data[0]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
 								<ul>
-									<li><i class="ti-time"></i> 10 Days</li>
-									<li><i class="ti-user"></i> 12+</li>
-									<li><i class="ti-location-pin"></i> Namatota</li>
+									<li><i class="ti-time"></i> {data[0]?.duration}</li>
+									<li><i class="ti-user"></i> {data[0]?.occupancy}</li>
+									<li><i class="ti-location-pin"></i> {data[0]?.location}</li>
 								</ul>
 							</div>
 						</div>
@@ -34,18 +35,24 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="item">
-					<div class="position-re o-hidden"><img src="/img/tours/italy1.jpg" alt="images" /></div>
-					<span class="category"><a href="/">$1.300</a></span>
+				<div class="item" style="height: 95%;">
+					<div class="position-re o-hidden" style="height: 100%;">
+						<img
+							style="height: 100%; object-fit:cover"
+							src={data[0]?.images[0]?.path}
+							alt="images"
+						/>
+					</div>
+					<span class="category"><a href="/">{data[0]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">Namatota Tour</a></h5>
+						<h5><a href="/">{data[0]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
 								<ul>
-									<li><i class="ti-time"></i> 6 Days</li>
-									<li><i class="ti-user"></i> 10+</li>
-									<li><i class="ti-location-pin"></i> Namatota</li>
+									<li><i class="ti-time"></i> {data[0]?.duration}</li>
+									<li><i class="ti-user"></i> {data[0]?.occupancy}</li>
+									<li><i class="ti-location-pin"></i> {data[0]?.location}</li>
 								</ul>
 							</div>
 						</div>
@@ -53,18 +60,20 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="item">
-					<div class="position-re o-hidden"><img src="/img/tours/france1.jpg" alt="images" /></div>
-					<span class="category"><a href="/">$400</a></span>
+				<div class="item" style="height: 95%;">
+					<div class="position-re o-hidden" style="height: 100%;">
+						<img style="height: 100%;" src={data[2]?.images[0]?.path} alt="images" />
+					</div>
+					<span class="category"><a href="/">{data[2]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">Namatota Tour</a></h5>
+						<h5><a href="/">{data[2]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
 								<ul>
-									<li><i class="ti-time"></i> 10 Days</li>
-									<li><i class="ti-user"></i> 6+</li>
-									<li><i class="ti-location-pin"></i> Namatota</li>
+									<li><i class="ti-time"></i> {data[2]?.duration}</li>
+									<li><i class="ti-user"></i> {data[2]?.occupancy}</li>
+									<li><i class="ti-location-pin"></i> {data[2]?.location}</li>
 								</ul>
 							</div>
 						</div>
@@ -72,18 +81,20 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="item">
-					<div class="position-re o-hidden"><img src="/img/tours/greece1.jpg" alt="images" /></div>
-					<span class="category"><a href="#">$500</a></span>
+				<div class="item" style="height: 95%;">
+					<div class="position-re o-hidden" style="height: 100%;">
+						<img style="height: 100%;" src={data[3]?.images[0]?.path} alt="images" />
+					</div>
+					<span class="category"><a href="/">{data[3]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">Namatota Tour</a></h5>
+						<h5><a href="/">{data[3]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
 								<ul>
-									<li><i class="ti-time"></i> 10 Days</li>
-									<li><i class="ti-user"></i> 12+</li>
-									<li><i class="ti-location-pin"></i> Namatota</li>
+									<li><i class="ti-time"></i> {data[3]?.duration}</li>
+									<li><i class="ti-user"></i> {data[3]?.occupancy}</li>
+									<li><i class="ti-location-pin"></i> {data[3]?.location}</li>
 								</ul>
 							</div>
 						</div>
@@ -91,18 +102,20 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="item">
-					<div class="position-re o-hidden"><img src="/img/tours/canada1.jpg" alt="images" /></div>
-					<span class="category"><a href="/">$300</a></span>
+				<div class="item" style="height: 95%;">
+					<div class="position-re o-hidden" style="height: 100%;">
+						<img style="height: 100%;" src={data[4]?.images[0]?.path} alt="images" />
+					</div>
+					<span class="category"><a href="/">{data[4]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">Namatota Tour</a></h5>
+						<h5><a href="/">{data[4]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
 								<ul>
-									<li><i class="ti-time"></i> 7 Days</li>
-									<li><i class="ti-user"></i> 10+</li>
-									<li><i class="ti-location-pin"></i> Namatota</li>
+									<li><i class="ti-time"></i> {data[4]?.duration}</li>
+									<li><i class="ti-user"></i> {data[4]?.occupancy}</li>
+									<li><i class="ti-location-pin"></i> {data[4]?.location}</li>
 								</ul>
 							</div>
 						</div>

@@ -1,3 +1,7 @@
+<script lang="ts">
+	export let data: any = [];
+</script>
+
 <section class="about cover section-padding">
 	<div class="container">
 		<div class="row">
@@ -34,14 +38,16 @@
 					<div class="icon"><span class="flaticon-phone-call"></span></div>
 					<div class="text">
 						<p>Informasi Lebih Lanjut</p>
-						<a href="tel:62 822-8707-1864">62 822-8707-1864</a>
+						<a href="https://wa.me/{data[0]?.phone_number}">{data[0]?.phone_number}</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-5 offset-md-1 animate-box" data-animate-effect="fadeInUp">
 				<div class="img-exp">
 					<div class="about-img">
-						<div class="img"><img src="/img/about.jpeg" class="img-fluid" alt="images" /></div>
+						<div class="img">
+							<img src={data[0]?.images[1]?.path} class="img-fluid" alt="images" />
+						</div>
 					</div>
 					<div id="circle">
 						<svg
