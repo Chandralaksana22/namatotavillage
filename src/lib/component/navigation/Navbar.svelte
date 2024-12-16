@@ -25,7 +25,7 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link active" href="/">Home</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="/destinasi">Destinasi</a></li>
+				<li class="nav-item"><a class="nav-link" href="/">Destinasi</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="/">Paket Wisata</a></li>
 				<li class="nav-item"><a class="nav-link" href="/">Souvenir</a></li>

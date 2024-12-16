@@ -8,6 +8,6 @@ export { universal };
 export const universal_id = "src/routes/+page.ts";
 export { server };
 export const server_id = "src/routes/+page.server.ts";
-export const imports = ["_app/immutable/nodes/2.CptZ_f2L.js","_app/immutable/chunks/scheduler.DkJsFCvd.js","_app/immutable/chunks/index.yZEH951e.js"];
+export const imports = ["_app/immutable/nodes/2.Bj0x3iu9.js","_app/immutable/chunks/scheduler.DkJsFCvd.js","_app/immutable/chunks/index.yZEH951e.js"];
 export const stylesheets = ["_app/immutable/assets/2.D7wrQ6zr.css"];
 export const fonts = [];

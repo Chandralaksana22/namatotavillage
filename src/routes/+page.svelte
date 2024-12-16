@@ -455,14 +455,14 @@
 							<div class="position-re o-hidden">
 								<img src="img/destination/aosta1.jpg" alt="" />
 								<div class="date">
-									<a href="post.html"> <span>Dec</span> <i>04</i> </a>
+									<a href="/"> <span>Dec</span> <i>04</i> </a>
 								</div>
 							</div>
 							<div class="con">
 								<span class="category">
-									<a href="blog.html">Tours</a>
+									<a href="/">Tours</a>
 								</span>
-								<h5><a href="post.html">Most Popular Yacht Charter Routes</a></h5>
+								<h5><a href="/">Most Popular Yacht Charter Routes</a></h5>
 							</div>
 						</div>
 					</SplideSlide>

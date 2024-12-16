@@ -1,4 +1,4 @@
-import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component, n as noop, a as safe_not_equal } from './chunks/ssr-DUw0Thgf.js';
+import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component, n as noop, a as safe_not_equal } from './chunks/ssr-Brqrx94K.js';
 import { a as afterUpdate, d as decode_pathname, h as has_data_suffix, s as strip_data_suffix, b as decode_params, n as normalize_path, c as disable_search, e as add_data_suffix, m as make_trackable, r as resolve } from './chunks/exports-C7jc1jv-.js';
 
 let base = "";
@@ -176,7 +176,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "2b6va0"
+  version_hash: "6ydreb"
 };
 async function get_hooks() {
   let handle;
