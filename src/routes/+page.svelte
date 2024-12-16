@@ -58,7 +58,7 @@
 							<i class="front flaticon-air-freight"></i>
 							<i class="back flaticon-air-freight"></i>
 						</span>
-						<h3 class="count">35 km</h3>
+						<h3>35 km</h3>
 						<h6>Dari Bandara</h6>
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 							<i class="font flaticon-house"></i>
 							<i class="back flaticon-house"></i>
 						</span>
-						<h3 class="count">28 km</h3>
+						<h3>28 km</h3>
 						<h6>Dari Pusat Kota</h6>
 					</div>
 				</div>
@@ -78,7 +78,7 @@
 							<i class="front flaticon-ship"></i>
 							<i class="back flaticon-ship"></i>
 						</span>
-						<h3 class="count">28 km</h3>
+						<h3>28 km</h3>
 						<h6>Dari Pelabuhan</h6>
 					</div>
 				</div>
