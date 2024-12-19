@@ -46,6 +46,7 @@
 		"@zerodevx/svelte-toast": "^0.9.6",
 		"aos": "^2.3.4",
 		"axios": "^1.7.7",
+		"express": "^4.21.2",
 		"flowbite": "^2.5.2",
 		"flowbite-svelte": "^0.47.4",
 		"nodemailer": "^6.9.15",
