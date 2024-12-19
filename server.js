@@ -1,11 +1,13 @@
-import { handler } from './build/index.js';
-import express from 'express';
+(async () => {
+    const express = (await import('express')).default;
+    const { handler } = await import('./build/index.js');
 
-const app = express();
-const port = process.env.PORT || 4001;
+    const app = express();
+    const port = process.env.PORT || 3000;
 
-app.use(handler);
+    app.use(handler);
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+    app.listen(port, () => {
+        console.log(`Server is running on http://localhost:${port}`);
+    });
+})();
