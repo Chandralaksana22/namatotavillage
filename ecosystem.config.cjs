@@ -7,6 +7,7 @@ module.exports = {
             cwd: ' /home/tisielmy/domains/namatota.my.id/public_html',
             watch: false,
             max_memory_restart: '200M',
+            script: 'build/index.js',
         }
     ]
 }
