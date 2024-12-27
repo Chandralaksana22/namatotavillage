@@ -1,4 +1,0 @@
-RewriteEngine On
-RewriteCond %{SERVER_PORT} 443
-RewriteRule ^index.html(.*) http://%{HTTP_HOST}:4001/$1 [P,L]
-RewriteRule (.*) http://%{HTTP_HOST}:4001/$1 [P,L]
