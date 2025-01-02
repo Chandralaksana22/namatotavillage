@@ -1,5 +1,6 @@
 <script lang="ts">
 	const currentYear = new Date().getFullYear();
+	export let data: any[] = [];
 </script>
 
 <footer class="footer clearfix">
@@ -16,7 +17,7 @@
 								</div>
 								<div class="footer-contact-link-content">
 									<h6>Hubungi Kami</h6>
-									<p>+1 123-456-0606</p>
+									<p>{data[0]?.phone_number}</p>
 								</div>
 							</div>
 							<div class="footer-contact-links-divider"></div>
@@ -26,7 +27,7 @@
 								</div>
 								<div class="footer-contact-link-content">
 									<h6>Hubungi kami melalui email</h6>
-									<p>info@travolagency.com</p>
+									<p>{data[0]?.email}</p>
 								</div>
 							</div>
 							<div class="footer-contact-links-divider"></div>
@@ -36,7 +37,7 @@
 								</div>
 								<div class="footer-contact-link-content">
 									<h6>Alamat</h6>
-									<p>24 King St, SC 29401 USA</p>
+									<p>{data[0]?.address}</p>
 								</div>
 							</div>
 						</div>

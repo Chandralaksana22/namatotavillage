@@ -7,10 +7,16 @@
 	import '@splidejs/svelte-splide/css';
 	import type { PageServerData } from './$types';
 	import Testimonials from '$lib/component/section/Testimonials.svelte';
+	import SectionRoom from '$lib/component/section/Section-Room.svelte';
+	import SectionSouvenir from '$lib/component/section/Section-Souvenir.svelte';
+	import SectionBlog from '$lib/component/section/Section-Blog.svelte';
 	export let data: PageServerData;
 	let information = data?.information;
 	let packages = data?.packages;
-	console.log(packages)
+	let room = data?.room;
+	let souvenir = data?.souvenir
+	let post = data?.post
+	console.log(information);
 </script>
 
 <svelte:head>
@@ -18,7 +24,8 @@
 </svelte:head>
 <Navbar />
 <section
-	style="background-image:url('{information[0]?.images[0]?.path}'); height:100vh; background-size:cover; background-repeat:no-repeat; position:relative;"
+	style="background-image:url('{information[0]?.images[0]
+		?.path}'); height:100vh; background-size:cover; background-repeat:no-repeat; position:relative;"
 >
 	<div
 		style="background: rgba(0, 0, 0, 0.3); position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;"
@@ -41,12 +48,12 @@
 		</div>
 	</div>
 </section>
-<SectionAbout data={information}/>
-<SectionTour data={packages}/>
+<SectionAbout data={information} />
+<SectionTour data={packages} />
 <section class="numbers">
 	<div
 		class="section-padding bg-img bg-fixed back-position-center"
-		data-background="{information[0]?.images[2]?.path}"
+		data-background={information[0]?.images[2]?.path}
 		data-overlay-dark="6"
 		style="background-image: url({information[0]?.images[2]?.path});"
 	>
@@ -106,199 +113,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="owl-carousel owl-theme owl-loaded owl-drag">
-					<div class="owl-stage-outer">
-						<div
-							class="owl-stage"
-							style="transform: translate3d(-966px, 0px, 0px); transition: all; width: 3864px;"
-						>
-							<div class="owl-item active" style="width: 292px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img
-											src="/img/destination/greece1.jpg"
-											alt="images"
-											style="height: 500px; object-fit:cover"
-										/>
-									</div>
-									<span class="category"><a>New</a></span>
-									<div class="con">
-										<h5><a><i class="ti-location-pin"></i> Greece</a></h5>
-										<div class="line"></div>
-										<div class="row facilities">
-											<div class="col col-md-8">
-												<p>6 Tour Packages</p>
-											</div>
-											<div class="col col-md-4 text-right">
-												<div class="permalink">
-													<a href="/">Explore <i class="ti-arrow-right"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 292px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img
-											src="/img/destination/france1.jpg"
-											style="height: 500px; object-fit:cover"
-											alt="images"
-										/>
-									</div>
-									<span class="category"><a>15% OFF</a></span>
-									<div class="con">
-										<h5><a><i class="ti-location-pin"></i> France</a></h5>
-										<div class="line"></div>
-										<div class="row facilities">
-											<div class="col col-md-8">
-												<p>10 Tour Packages</p>
-											</div>
-											<div class="col col-md-4 text-right">
-												<div class="permalink">
-													<a href="/">Explore <i class="ti-arrow-right"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 292px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img
-											src="/img/destination/dubai1.jpg"
-											style="height: 500px; object-fit:cover"
-											alt="images"
-										/>
-									</div>
-									<span class="category"><a href="/">7 Tours</a></span>
-									<div class="con">
-										<h5><a href="/"><i class="ti-location-pin"></i> Dubai</a></h5>
-										<div class="line"></div>
-										<div class="row facilities">
-											<div class="col col-md-8">
-												<p>7 Tour Packages</p>
-											</div>
-											<div class="col col-md-4 text-right">
-												<div class="permalink">
-													<a href="/">Explore <i class="ti-arrow-right"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 292px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img
-											src="/img/destination/maldives1.jpg"
-											style="height: 500px; object-fit:cover"
-											alt="images"
-										/>
-									</div>
-									<span class="category"><a>New</a></span>
-									<div class="con">
-										<h5>
-											<a href="/"><i class="ti-location-pin"></i> Maldives</a>
-										</h5>
-										<div class="line"></div>
-										<div class="row facilities">
-											<div class="col col-md-8">
-												<p>4 Tour Packages</p>
-											</div>
-											<div class="col col-md-4 text-right">
-												<div class="permalink">
-													<a href="/">Explore <i class="ti-arrow-right"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 292px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img
-											src="/img/destination/greece1.jpg"
-											style="height: 500px; object-fit:cover"
-											alt="images"
-										/>
-									</div>
-									<span class="category"><a>New</a></span>
-									<div class="con">
-										<h5><a><i class="ti-location-pin"></i> Greece</a></h5>
-										<div class="line"></div>
-										<div class="row facilities">
-											<div class="col col-md-8">
-												<p>6 Tour Packages</p>
-											</div>
-											<div class="col col-md-4 text-right">
-												<div class="permalink">
-													<a href="/">Explore <i class="ti-arrow-right"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 292px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img
-											src="/img/destination/france1.jpg"
-											style="height: 500px; object-fit:cover"
-											alt="images"
-										/>
-									</div>
-									<span class="category"><a>15% OFF</a></span>
-									<div class="con">
-										<h5><a><i class="ti-location-pin"></i> France</a></h5>
-										<div class="line"></div>
-										<div class="row facilities">
-											<div class="col col-md-8">
-												<p>10 Tour Packages</p>
-											</div>
-											<div class="col col-md-4 text-right">
-												<div class="permalink">
-													<a href="/">Explore <i class="ti-arrow-right"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 292px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img
-											src="/img/destination/dubai1.jpg"
-											style="height: 500px; object-fit:cover"
-											alt="images"
-										/>
-									</div>
-									<span class="category"><a href="/">7 Tours</a></span>
-									<div class="con">
-										<h5><a href="/"><i class="ti-location-pin"></i> Dubai</a></h5>
-										<div class="line"></div>
-										<div class="row facilities">
-											<div class="col col-md-8">
-												<p>7 Tour Packages</p>
-											</div>
-											<div class="col col-md-4 text-right">
-												<div class="permalink">
-													<a href="/">Explore <i class="ti-arrow-right"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<SectionRoom data={room} />
 			</div>
 		</div>
 	</div>
@@ -307,8 +122,8 @@
 	<div class="container">
 		<div class="row mb-30">
 			<div class="col-md-12">
-				<div class="section-subtitle">Suvenir Eksklusif</div>
-				<div class="section-title"><span>Suvenir</span> Namatota</div>
+				<div class="section-subtitle">Cendera mata Eksklusif</div>
+				<div class="section-title"><span>Cendera mata</span> Namatota</div>
 			</div>
 		</div>
 		<!-- Italy Tours -->
@@ -316,7 +131,7 @@
 			<div class="col-md-5">
 				<div class="country country1 mt-30">
 					<p>
-						Kami menyediakan berbagai macam suvenir unik dan menarik yang mencerminkan keindahan dan
+						Kami menyediakan berbagai macam cendera mata unik dan menarik yang mencerminkan keindahan dan
 						kekayaan budaya Namatota. Temukan koleksi eksklusif yang akan menjadi kenangan indah
 						dari perjalanan Anda ke Namatota, dari kerajinan tangan lokal hingga barang-barang khas
 						yang hanya dapat Anda temui di sini.
@@ -330,85 +145,7 @@
 				</div>
 			</div>
 			<div class="col-md-7">
-				<div class="owl-carousel owl-theme owl-loaded owl-drag">
-					<div class="owl-stage-outer">
-						<div
-							class="owl-stage"
-							style="transform: translate3d(-849px, 0px, 0px); transition: all; width: 3396px;"
-						>
-							<div class="owl-item active" style="width: 253px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img src="/img/destination/venice1.jpg" alt="images" />
-									</div>
-
-									<div class="con">
-										<h5><a href="/">Namatota</a></h5>
-										<div class="line"></div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 253px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img src="/img/destination/milano.jpg" alt="images" />
-									</div>
-									<div class="con">
-										<h5><a href="/">Namatota</a></h5>
-										<div class="line"></div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 253px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img src="/img/destination/perugia1.jpg" alt="images" />
-									</div>
-
-									<div class="con">
-										<h5><a href="/">Namatota</a></h5>
-										<div class="line"></div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 253px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img src="/img/destination/parma1.jpg" alt="images" />
-									</div>
-									<div class="con">
-										<h5><a href="/">Namatota</a></h5>
-										<div class="line"></div>
-									</div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 253px; margin-right: 30px;">
-								<div class="item">
-									<div class="position-re o-hidden">
-										<img src="/img/destination/aosta1.jpg" alt="images" />
-									</div>
-									<div class="con">
-										<h5><a href="/">Namatota</a></h5>
-										<div class="line"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- <div class="owl-nav disabled">
-						<button type="button" role="presentation" class="owl-prev"
-							><span class="lnr ti-angle-left"></span></button
-						><button type="button" role="presentation" class="owl-next"
-							><span class="lnr ti-angle-right"></span></button
-						>
-					</div>
-					<div class="owl-dots">
-						<button role="button" class="owl-dot active"><span></span></button><button
-							role="button"
-							class="owl-dot"><span></span></button
-						><button role="button" class="owl-dot"><span></span></button>
-					</div> -->
-				</div>
+				<SectionSouvenir data={souvenir}/>
 			</div>
 		</div>
 	</div>
@@ -423,53 +160,10 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<Splide
-					options={{
-						rewind: false,
-						gap: 5,
-						perPage: 3,
-						type: 'slide',
-						arrows: true,
-						pagination: false,
-						breakpoints: {
-							1024: {
-								perPage: 3,
-								gap: 10,
-								padding: { right: '10%', left: '7%' }
-							},
-							768: {
-								perPage: 1,
-								gap: 10,
-								padding: { right: '10%', left: '7%' }
-							},
-							480: {
-								perPage: 1,
-								gap: 10,
-								padding: { right: '10%', left: '7%' }
-							}
-						}
-					}}
-				>
-					<SplideSlide>
-						<div class="item">
-							<div class="position-re o-hidden">
-								<img src="img/destination/aosta1.jpg" alt="" />
-								<div class="date">
-									<a href="/"> <span>Dec</span> <i>04</i> </a>
-								</div>
-							</div>
-							<div class="con">
-								<span class="category">
-									<a href="/">Tours</a>
-								</span>
-								<h5><a href="/">Most Popular Yacht Charter Routes</a></h5>
-							</div>
-						</div>
-					</SplideSlide>
-				</Splide>
+			<SectionBlog data={post}/>
 			</div>
 		</div>
 	</div>
 </section>
-<Testimonials data={information}/>
-<Footer />
+<Testimonials data={information} />
+<Footer data={information} />
