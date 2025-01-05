@@ -69,7 +69,7 @@
 				<br /><br />
 				<div class="col-md-12">
 					<a href={detail?.link_book} class="butn-dark"
-						><a href="#0"><span>Pesan Sekarang</span></a></a
+						><a href="/"><span>Pesan Sekarang</span></a></a
 					>
 				</div>
 			</div>

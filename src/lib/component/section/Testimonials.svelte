@@ -55,7 +55,7 @@
 											inilla neca ine the sene miss habitan.
 										</p>
 										<div class="info">
-											<div class="author-img"><img src="img/team/05.png" alt="" /></div>
+											<!-- <div class="author-img"><img src="img/team/05.png" alt="" /></div> -->
 											<div class="cont">
 												<div class="rating">
 													<i class="star active"></i> <i class="star active"></i>

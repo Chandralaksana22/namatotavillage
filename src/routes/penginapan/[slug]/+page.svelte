@@ -124,7 +124,7 @@
 										></textarea>
 									</div>
 									<div class="col-md-12">
-										<button class="butn-dark"><a href="#0"><span>Pesan Sekarang</span></a></button>
+										<button class="butn-dark"><a href="/"><span>Pesan Sekarang</span></a></button>
 									</div>
 								</div>
 							</form>
