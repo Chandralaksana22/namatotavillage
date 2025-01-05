@@ -61,8 +61,8 @@
 						</div>
 						<div class="col col-md-4 text-right">
 							<div class="permalink">
-								<a href="/">
-									Explore <i class="ti-arrow-right"></i>
+								<a href="/penginapan/{item?.slug}">
+									Selengkapnya 
 								</a>
 							</div>
 						</div>

@@ -10,3 +10,13 @@ export async function getPackage() {
 		console.log(error);
 	}
 }
+export async function getPackageDetail(slug?: string) {
+	try {
+		const resp = await apiClient.get(
+			`/paket/${slug}`
+		);
+		return resp.data?.data;
+	} catch (error) {
+		console.log(error);
+	}
+}

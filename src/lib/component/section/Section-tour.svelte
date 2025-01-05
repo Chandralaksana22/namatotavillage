@@ -18,9 +18,9 @@
 					<div class="position-re o-hidden" style="height: 100%;">
 						<img style="height: 100%;" src={data[0]?.images[0]?.path} alt="images" />
 					</div>
-					<span class="category"><a href="/">{data[0]?.rate}</a></span>
+					<span class="category"><a data-sveltekit-reload href="/paket-wisata/{data[0]?.slug}">{data[0]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">{data[0]?.name}</a></h5>
+						<h5><a data-sveltekit-reload href="/paket-wisata/{data[0]?.slug}">{data[0]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
@@ -39,20 +39,20 @@
 					<div class="position-re o-hidden" style="height: 100%;">
 						<img
 							style="height: 100%; object-fit:cover"
-							src={data[0]?.images[0]?.path}
+							src={data[1]?.images[0]?.path}
 							alt="images"
 						/>
 					</div>
-					<span class="category"><a href="/">{data[0]?.rate}</a></span>
+					<span class="category"><a data-sveltekit-reload href="/paket-wisata/{data[1]?.slug}">{data[1]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">{data[0]?.name}</a></h5>
+						<h5><a data-sveltekit-reload href="/paket-wisata/{data[1]?.slug}">{data[1]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
 								<ul>
-									<li><i class="ti-time"></i> {data[0]?.duration}</li>
-									<li><i class="ti-user"></i> {data[0]?.occupancy}</li>
-									<li><i class="ti-location-pin"></i> {data[0]?.location}</li>
+									<li><i class="ti-time"></i> {data[1]?.duration}</li>
+									<li><i class="ti-user"></i> {data[1]?.occupancy}</li>
+									<li><i class="ti-location-pin"></i> {data[1]?.location}</li>
 								</ul>
 							</div>
 						</div>
@@ -64,9 +64,9 @@
 					<div class="position-re o-hidden" style="height: 100%;">
 						<img style="height: 100%;" src={data[2]?.images[0]?.path} alt="images" />
 					</div>
-					<span class="category"><a href="/">{data[2]?.rate}</a></span>
+					<span class="category"><a data-sveltekit-reload href="/paket-wisata/{data[2]?.slug}">{data[2]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">{data[2]?.name}</a></h5>
+						<h5><a data-sveltekit-reload href="/paket-wisata/{data[0]?.slug}">{data[2]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
@@ -85,9 +85,9 @@
 					<div class="position-re o-hidden" style="height: 100%;">
 						<img style="height: 100%;" src={data[3]?.images[0]?.path} alt="images" />
 					</div>
-					<span class="category"><a href="/">{data[3]?.rate}</a></span>
+					<span class="category"><a data-sveltekit-reload href="/paket-wisata/{data[3]?.slug}">{data[3]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">{data[3]?.name}</a></h5>
+						<h5><a data-sveltekit-reload href="/paket-wisata/{data[3]?.slug}">{data[3]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">
@@ -106,9 +106,9 @@
 					<div class="position-re o-hidden" style="height: 100%;">
 						<img style="height: 100%;" src={data[4]?.images[0]?.path} alt="images" />
 					</div>
-					<span class="category"><a href="/">{data[4]?.rate}</a></span>
+					<span class="category"><a data-sveltekit-reload href="/paket-wisata/{data[4]?.slug}">{data[4]?.rate}</a></span>
 					<div class="con">
-						<h5><a href="/">{data[4]?.name}</a></h5>
+						<h5><a data-sveltekit-reload href="/paket-wisata/{data[4]?.slug}">{data[4]?.name}</a></h5>
 						<div class="line"></div>
 						<div class="row facilities">
 							<div class="col col-md-12">

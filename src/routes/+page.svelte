@@ -14,9 +14,8 @@
 	let information = data?.information;
 	let packages = data?.packages;
 	let room = data?.room;
-	let souvenir = data?.souvenir
-	let post = data?.post
-	console.log(information);
+	let souvenir = data?.souvenir;
+	let post = data?.post;
 </script>
 
 <svelte:head>
@@ -131,21 +130,19 @@
 			<div class="col-md-5">
 				<div class="country country1 mt-30">
 					<p>
-						Kami menyediakan berbagai macam cendera mata unik dan menarik yang mencerminkan keindahan dan
-						kekayaan budaya Namatota. Temukan koleksi eksklusif yang akan menjadi kenangan indah
-						dari perjalanan Anda ke Namatota, dari kerajinan tangan lokal hingga barang-barang khas
-						yang hanya dapat Anda temui di sini.
+						Kami menyediakan berbagai macam cendera mata unik dan menarik yang mencerminkan
+						keindahan dan kekayaan budaya Namatota. Temukan koleksi eksklusif yang akan menjadi
+						kenangan indah dari perjalanan Anda ke Namatota, dari kerajinan tangan lokal hingga
+						barang-barang khas yang hanya dapat Anda temui di sini.
 					</p>
 
 					<div class="butn-dark mt-30 mb-30">
-						<a href="/" data-scroll-nav="1" class=""
-							><span>Explore <i class="ti-arrow-right"></i></span></a
-						>
+						<a href="/" data-scroll-nav="1" class=""><span>Selengkapnya </span></a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-7">
-				<SectionSouvenir data={souvenir}/>
+				<SectionSouvenir data={souvenir} />
 			</div>
 		</div>
 	</div>
@@ -160,7 +157,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-			<SectionBlog data={post}/>
+				<SectionBlog data={post} />
 			</div>
 		</div>
 	</div>

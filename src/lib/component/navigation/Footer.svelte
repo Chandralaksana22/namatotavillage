@@ -51,20 +51,25 @@
 				<!-- about & social icons -->
 				<div class="col-md-4 widget-area">
 					<div class="widget clearfix">
-						<div class="footer-logo"><img class="img-fluid" src="img/logo-light.png" alt="" /></div>
+						<!-- <div class="footer-logo"><img class="img-fluid" src="img/logo-light.png" alt="" /></div> -->
 						<div class="widget-text">
+							<p>
+								Terletak di Pulau Namatota, Kabupaten Kaimana, Papua Barat, Desa Namatota dikenal
+								sebagai “Permata Tersembunyi” yang menawarkan keindahan Teluk Triton, budaya lokal
+								yang autentik, dan pesona alam yang memukau.
+							</p>
 							<p>
 								Temukan pengalaman wisata unik di desa yang kaya tradisi dan keindahan eksotis Papua
 								Barat.
 							</p>
-							<div class="social-icons">
+							<!-- <div class="social-icons">
 								<ul class="list-inline">
 									<li><a href="#"><i class="ti-instagram"></i></a></li>
 									<li><a href="#"><i class="ti-twitter"></i></a></li>
 									<li><a href="#"><i class="ti-facebook"></i></a></li>
 									<li><a href="#"><i class="ti-youtube"></i></a></li>
 								</ul>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -74,11 +79,10 @@
 						<h3 class="widget-title">Navigasi</h3>
 						<ul>
 							<li><a href="/">Home</a></li>
-							<li><a href="/">Paket Wisata</a></li>
-							<li><a href="/">Destinasi</a></li>
-							<li><a href="/">Homestay</a></li>
-							<li><a href="/">Souvenir</a></li>
-							<li><a href="/">Blog</a></li>
+							<li><a href="/paket-wisata">Paket Wisata</a></li>
+							<li><a href="/penginapan">Penginapan</a></li>
+							<li><a href="/souvenir">Souvenir</a></li>
+							<li><a href="/blog">Blog</a></li>
 						</ul>
 					</div>
 				</div>

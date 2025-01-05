@@ -10,3 +10,13 @@ export async function getRoom() {
 		console.log(error);
 	}
 }
+export async function getRoomDetail(slug?: string) {
+	try {
+		const resp = await apiClient.get(
+			`/room/${slug}`
+		);
+		return resp.data?.data;
+	} catch (error) {
+		console.log(error);
+	}
+}

@@ -2,10 +2,10 @@
 	<div class="container">
 		<!-- Logo -->
 		<div class="logo-wrapper">
-			<a class="logo" href="/">
+			<a class="logo" data-sveltekit-reload href="/">
 				<img src="/img/logo-light.png" class="logo-img" alt="logo" />
 			</a>
-			<!-- <a class="logo" href="/"> <h2>TRAVOL <span>explore the world</span></h2> </a> -->
+			<!-- <a class="logo" data-sveltekit-reload href="/"> <h2>TRAVOL <span>Selengkapnya the world</span></h2> </a> -->
 		</div>
 		<!-- Button -->
 		<button
@@ -23,16 +23,22 @@
 		<div class="collapse navbar-collapse" id="navbar">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item dropdown">
-					<a class="nav-link active" href="/">Home</a>
+					<a class="nav-link" data-sveltekit-reload href="/">Home</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="/">Destinasi</a></li>
+				<li class="nav-item">
+					<a class="nav-link" data-sveltekit-reload href="/paket-wisata">Paket Wisata</a>
+				</li>
 
-				<li class="nav-item"><a class="nav-link" href="/">Paket Wisata</a></li>
-				<li class="nav-item"><a class="nav-link" href="/">Souvenir</a></li>
-				<li class="nav-item"><a class="nav-link" href="/">Blog</a></li>
-				<li class="nav-item"><a class="nav-link" href="/">Gallery</a></li>
+				<li class="nav-item">
+					<a class="nav-link" data-sveltekit-reload href="/penginapan">Penginapan</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-sveltekit-reload href="/souvenir">Souvenir</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" data-sveltekit-reload href="/">Blog</a></li>
+				<!-- <li class="nav-item"><a class="nav-link" data-sveltekit-reload href="/">Gallery</a></li> -->
 
-				<li class="nav-item"><a class="nav-link" href="/">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" data-sveltekit-reload href="/">Contact</a></li>
 			</ul>
 		</div>
 	</div>
