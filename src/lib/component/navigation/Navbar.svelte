@@ -35,10 +35,10 @@
 				<li class="nav-item">
 					<a class="nav-link" data-sveltekit-reload href="/souvenir">Souvenir</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" data-sveltekit-reload href="/">Blog</a></li>
+				<li class="nav-item"><a class="nav-link" data-sveltekit-reload href="/blog">Blog</a></li>
 				<!-- <li class="nav-item"><a class="nav-link" data-sveltekit-reload href="/">Gallery</a></li> -->
 
-				<li class="nav-item"><a class="nav-link" data-sveltekit-reload href="/">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" data-sveltekit-reload href="/contact">Contact</a></li>
 			</ul>
 		</div>
 	</div>

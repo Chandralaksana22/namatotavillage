@@ -44,7 +44,7 @@
 				</div>
 
 				<div class="con">
-					<h5><a href="/">{item?.name}</a></h5>
+					<h5><a href="/souvenir/{item?.slug}">{item?.name}</a></h5>
 					<div class="line"></div>
 				</div>
 			</div>

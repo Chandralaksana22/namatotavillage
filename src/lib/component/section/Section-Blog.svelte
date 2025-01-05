@@ -45,9 +45,9 @@
 				</div>
 				<div class="con">
 					<span class="category">
-						<a href="/">{item?.category}</a>
+						<a href="/blog/{item?.slug}">{item?.category}</a>
 					</span>
-					<h5><a href="/">{item?.name}</a></h5>
+					<h5><a href="/blog/{item?.slug}">{item?.name}</a></h5>
 				</div>
 			</div>
 		</SplideSlide>

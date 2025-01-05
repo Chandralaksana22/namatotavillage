@@ -137,7 +137,7 @@
 					</p>
 
 					<div class="butn-dark mt-30 mb-30">
-						<a href="/" data-scroll-nav="1" class=""><span>Selengkapnya </span></a>
+						<a href="/souvenir" data-scroll-nav="1" class=""><span>Selengkapnya </span></a>
 					</div>
 				</div>
 			</div>
