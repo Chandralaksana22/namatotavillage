@@ -9,7 +9,6 @@ export const load: PageServerLoad = async ({ params, url }) => {
         ]);
 
         return {
-            maxage: 120,
             information,
             detail
         };
